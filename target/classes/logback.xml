@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<configuration scan="true"> 
+	<!--定义日志文件的存储地址 ,也可以在相对于根目录下 使用相对路径 -->
+	<property name="LOG_HOME" value="${catalina.base}/logs" />
+
+	<!-- 打印到控制台的日志格式 -->
+	<appender name="STDOUT"
+		class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<Pattern>[%date{yyyy-MM-dd HH:mm:ss.SSS}] %X{logthreadId} %-5level %logger{80} %method  %line - %msg%n</Pattern>
+		</encoder>
+	</appender>
+	
+	<appender name="LOG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}${file.separator}xytStartQuartz.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>
+                [%date{yyyy-MM-dd HH:mm:ss.SSS}] %X{logthreadId} %-5level %logger{80} %method  %line - %msg%n
+            </pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}${file.separator}%d{yyyy-MM-dd}${file.separator}%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
+            <maxHistory>7</maxHistory>
+            <!-- 102400KB -->
+            <maxFileSize>102400KB</maxFileSize>
+        </rollingPolicy>
+    </appender>
+	
+    <!-- 日志输出级别 -->
+	<root level="DEBUG">
+		<appender-ref ref="STDOUT" />
+	</root>
+	<root level="INFO">
+		<appender-ref ref="LOG_FILE" />
+	</root>
+</configuration>  

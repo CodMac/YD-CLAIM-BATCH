@@ -1,0 +1,45 @@
+server:
+    #端口
+    port: 8080
+    tomcat:
+        uri-encoding: UTF-8
+    
+spring:
+    application:
+        name: YD-CLAIM-BATCH
+    #db  -- 默认数据源
+    datasource:
+        #本地开发
+        #url: jdbc:mysql://127.0.0.1:3306/yd-claim-settlement?characterEncoding=UTF-8&useSSL=false
+        #username: root
+        #password: Zqit3503
+        #测试环境
+        url: jdbc:mysql://127.0.0.1:3306/yd-claim-settlement?characterEncoding=UTF-8&useSSL=false
+        username: zqitdev
+        password: Yd20190530_
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+
+#mybatis                         
+mybatis:
+    mapper-locations: classpath:mapper/**/*Mapper.xml
+    
+# 更多数据源
+custom:
+    datasource:
+        names: db1,db2
+        db1:
+#            type: javax.sql.DataSource
+#            jndi-name: jdbc/db1 
+        db2:
+#            type: javax.sql.DataSource
+#            jndi-name: jdbc/db2    
+        
+#日志管理            
+logging: 
+    level: 
+        zqit: 
+            claim: debug
+            
+
+    
